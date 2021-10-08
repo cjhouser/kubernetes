@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
     - name: counter-container
-      image: cjhouser/counter:v1
+      image: cjhouser/counter:1.0
       ports:
         - name: counter-port
           containerPort: 8080
