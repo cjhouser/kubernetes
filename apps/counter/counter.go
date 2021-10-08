@@ -7,7 +7,7 @@ import (
 
 func main() {
 	counter := 0
-	http.HandleFunc("/count", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close()
 		counter++
 		fmt.Fprintf(w, "Count: %d", counter)
