@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: shell
+  labels:
+    lab: pod-to-service 
+spec:
+  containers:
+    - name: shell
+      image: alpine:3.14.2
+      command: ["/bin/sh", "-c"]
+      args:
+        - sleep infinity;
+  restartPolicy: Never
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: counters
+  labels:
+    lab: pod-to-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: counter
+  template:
+    metadata:
+      labels:
+        app: counter
+    spec:
+      containers:
+      - name: counter
+        image: cjhouser/counter:1.0.0
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: internal-service
+  labels:
+    lab: pod-to-service
+spec:
+  selector:
+    app: counter
+  ports:
+  - port: 8080
