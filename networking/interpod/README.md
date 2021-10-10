@@ -10,12 +10,12 @@ This lab sets up two pods with one container in each to show that the two contai
 1. Note the IP address of `interpod-a`
     > kubectl get pods -o wide
 1. Start a shell in the container on pod `interpod-b`
-    > kubectl exec intrapod -c shell --stdin --tty -- /bin/sh
+    > kubectl exec interpod -c shell --stdin --tty -- /bin/sh
 
 1. Send a request to the counter server on `interpod-a` and print the response to stdout
     > wget -qO - http://<i>\<interpod-a-ip></i>:8080/
 1. Terminate the pods
-    > kubectl delete pods -l lab=intrapod --grace-period=0
+    > kubectl delete pods -l lab=interpod --grace-period=0
 
 ## Benefits
 * Pods can be treated like standard machines from a network perspective
