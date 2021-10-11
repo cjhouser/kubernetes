@@ -1,5 +1,11 @@
 # Pod-to-service Networking
-Use Kubernetes services to expose pods internally to the cluster with a reliable IP address. The service will loadbalance traffic across pods that the service targets via labels.
+Use Kubernetes services to expose pods internally to the cluster with a reliable IP address. The service will balance traffic across pods that the service targets.
+
+# Lab
+This lab sets up a deployment with one replica (two pods).
+The deployment contains two small HTTP servers.
+Each listen for requests on port 8080, increment their local counter when receiving a request, and send an HTTP response back to the requester with the current local count.
+Instead of using the IP addresses of the pods directly, a service is put in place that knows how to find those pods in the cluster, whatever their IP addresses may be.
 
 # Usage
 1. Spin up the resources
