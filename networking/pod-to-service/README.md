@@ -21,7 +21,10 @@ Use Kubernetes services to expose pods internally to the cluster with a reliable
     > k delete all -l lab=pod-to-service --grace-period=0
 
 # Benefits
-* 
+* Service resources decouple clients from backends
+    * For instance, a service can expose port 8000 for incoming requests, then redirect those requests to port 80 on the target pods
+* Built-in load balancing
+* Consistent addressing to ephemeral pods
 
 # Drawbacks
-* (something to do with loadbalancing. not being able to configure it)
+* (something to do with load balancing. not being able to configure it)
