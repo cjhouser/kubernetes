@@ -2,7 +2,7 @@
 Kubernetes services can expose pods internally to the cluster with a reliable IP address. A service will balance traffic across target pods.
 
 # Lab
-This lab sets up a deployment with one replica (two pods).
+This lab sets up a deployment with two replicas (two pods).
 The deployment contains two small HTTP servers.
 Each listen for requests on port 8080, increment their local counter when receiving a request, and send an HTTP response back to the requester with the current local count.
 Instead of using the IP addresses of the pods directly, a service is put in place that knows how to find those pods in the cluster, whatever their IP addresses may be.
