@@ -19,11 +19,15 @@ spec:
       - name: jenkins
         image: cjhouser/jenkins:1.0.0
         ports:
-        - containerPort: 8080
+        - name: http-port
+          containerPort: 8080
+        - name: jnlp-port
+          containerPort: 50000
         volumeMounts:
-        - name: jenkins-home
+        - name: jenkins-volume
           mountPath: /var/jenkins_home
       volumes:
-      - name: jenkins-home
-        emptyDir: { }
+      - name: jenkins-volume
+        persistentVolumeClaim:
+        claimName: jenkins-pvc
 
