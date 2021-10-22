@@ -14,21 +14,4 @@ MAKEFLAGS += -j$(NPROCS)
 OBJECTS = counter.go
 
 build:
-	go build -o build/counter $(OBJECTS)
-
-run:
-	go run $(OBJECTS)
-
-compile: linux-amd64 linux-arm64 darwin-amd64 darwin-arm64
-	
-linux-amd64:
-	GOOS=linux GOARCH=amd64 go build -o build/counter-linux-amd64 $(OBJECTS)
-
-linux-arm64:
-	GOOS=linux GOARCH=arm64 go build -o build/counter-linux-arm64 $(OBJECTS)
-
-darwin-amd64:
-	GOOS=darwin GOARCH=amd64 go build -o build/counter-darwin-amd64 $(OBJECTS)
-
-darwin-arm64:
-	GOOS=darwin GOARCH=arm64 go build -o build/counter-darwin-arm64 $(OBJECTS)
+	docker buildx build --push --platform linux/arm64,linux/amd64 -t cjhouser/counter:latest -t cjhouser/counter:1.0.0 .
