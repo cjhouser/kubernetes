@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shell-deployment
+  labels:
+    lab: persistent-volumes
+spec:
+  selector:
+    matchLabels:
+      lab: persistent-volumes
+  template:
+    metadata:
+      labels:
+        lab: persistent-volumes
+    spec:
+      volumes:
+        - name: persistent-volume-claim
+          persistentVolumeClaim:
+            claimName: persistent-volume-claim
+      containers:
+      - name: shell
+        image: bash:alpine3.14
+        command: ["sleep", "600"]
+        volumeMounts:
+        - mountPath: /nfs
+          name: persistent-volume-claim
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: persistent-volume
+  labels:
+    lab: persistent-volumes
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/nfs"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: persistent-volume-claim
+  labels:
+    lab: persistent-volumes
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Mi
