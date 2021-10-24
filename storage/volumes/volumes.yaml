@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shell-deployment
+  labels:
+    lab: volumes
+spec:
+  selector:
+    matchLabels:
+      lab: volumes
+  template:
+    metadata:
+      labels:
+        lab: volumes
+    spec:
+      containers:
+      - name: shell
+        image: bash:alpine3.14
+        command: ["sleep", "600"]
+        volumeMounts:
+        - mountPath: /volume
+          name: shell-volume
+      volumes:
+      - name: shell-volume
+        emptyDir: {}
