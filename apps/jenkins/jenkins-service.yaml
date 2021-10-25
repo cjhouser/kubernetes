@@ -11,6 +11,7 @@ spec:
   - port: 8080
     targetPort: 8080
     nodePort: 30000
+<<<<<<< HEAD
   selector:
     app: jenkins
 ---
@@ -24,5 +25,7 @@ spec:
   ports:
       - port: 50000
         targetPort: 50000
+=======
+>>>>>>> d9ff7fdb4f22f22079eb991fb5103e5dfe90b12d
   selector:
     app: jenkins
